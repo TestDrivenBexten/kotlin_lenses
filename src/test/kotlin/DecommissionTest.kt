@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 class DecommissionTest {
 
     @Test
-    fun decommision_should_remove_ship(){
+    fun decommission_should_remove_ship(){
         val fleet = Fleet("Delta",
             listOf(Squadron("Hope",
                 listOf(
@@ -14,7 +14,7 @@ class DecommissionTest {
                 )
             )
         )
-        val expectedfleet = Fleet("Delta",
+        val expectedFleet = Fleet("Delta",
             listOf(Squadron("Hope",
                 listOf(
                     Starship("Minotaur", "YR023")
@@ -22,7 +22,7 @@ class DecommissionTest {
             )
             )
         )
-        val actualFleet = DecommissionShip(fleet, "Hope", "Pegasus")
-        assertEquals(expectedfleet, actualFleet)
+        val actualFleet = decommissionShip(fleet, "Hope", "Pegasus")
+        assertEquals(expectedFleet, actualFleet)
     }
 }
