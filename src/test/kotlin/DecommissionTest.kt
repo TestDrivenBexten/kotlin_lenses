@@ -27,6 +27,14 @@ class DecommissionTest {
     }
 
     @Test
+    fun arrow_starship_should_be_renamed(){
+        val starship = Starship("Pegasus", "POX351")
+        val expectedStarship = Starship("Minotaur", "POX351")
+        val renamedStarship = arrowRenameStarship(starship, "Minotaur")
+        assertEquals(expectedStarship, renamedStarship)
+    }
+
+    @Test
     fun arrow_decommission_should_remove_ship(){
         val fleet = Fleet("Delta",
             listOf(Squadron("Hope",
