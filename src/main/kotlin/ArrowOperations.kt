@@ -10,6 +10,10 @@ fun arrowRenameStarship(starship: Starship, shipName: String): Starship {
     return starshipName.modify(starship, shipLambda)
 }
 
+fun arrowRenameShipInSquadron(squadron: Squadron, serialNumber: String, shipName: String) : Squadron {
+    return squadron
+}
+
 fun arrowDecommissionShip(fleet: Fleet, squadName: String, shipName: String): Fleet {
     return fleet
 }
