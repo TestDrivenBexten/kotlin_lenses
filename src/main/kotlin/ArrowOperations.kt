@@ -6,7 +6,7 @@ val starshipName: Lens<Starship, String> = Lens(
     set = { starship, shipName -> starship.copy(shipName = shipName)}
 )
 
-val starhips: Lens<Squadron, List<Starship>> = Lens(
+val starships: Lens<Squadron, List<Starship>> = Lens(
     get = { it.registry },
     set = { squadron, registry -> squadron.copy(registry = registry)}
 )
@@ -27,7 +27,9 @@ fun renameShipBySerialNumber(starship: Starship, serialNumber: String, shipName:
 }
 
 fun arrowRenameShipInSquadron(squadron: Squadron, serialNumber: String, shipName: String) : Squadron {
-    return squadron
+    val squadronMap = starships compose everyStarship
+    val squadUpdate = { starship: Starship -> renameShipBySerialNumber(starship, serialNumber, shipName)}
+    return squadronMap.modify(squadron, squadUpdate)
 }
 
 fun arrowDecommissionShip(fleet: Fleet, squadName: String, shipName: String): Fleet {
