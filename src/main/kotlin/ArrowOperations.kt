@@ -18,6 +18,11 @@ fun arrowRenameStarship(starship: Starship, shipName: String): Starship {
     return starshipName.modify(starship, shipLambda)
 }
 
+fun arrowRemoveShipBySerialNumber(squadron: Squadron, serialNumber: String): Squadron {
+    val removeShip = { shipList: List<Starship> -> shipList.filter { !it.serialNumber.equals(serialNumber) } }
+    return starships.modify(squadron, removeShip)
+}
+
 fun renameShipBySerialNumber(starship: Starship, serialNumber: String, shipName: String): Starship{
     return if (starship.serialNumber.equals(serialNumber)){
         starship.copy(shipName = shipName)

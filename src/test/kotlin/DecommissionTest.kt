@@ -53,6 +53,23 @@ class DecommissionTest {
     }
 
     @Test
+    fun arrow_squadron_should_remove_ship_by_serial_number(){
+        val squadron = Squadron("Hope",
+            listOf(
+                Starship("Pegasus", "XP130"),
+                Starship("Minotaur", "YR023")
+            )
+        )
+        val expectedSquadron = Squadron("Hope",
+            listOf(
+                Starship("Pegasus", "XP130")
+            )
+        )
+        val modifiedSquadron = arrowRemoveShipBySerialNumber(squadron, "YR023")
+        assertEquals(expectedSquadron, modifiedSquadron)
+    }
+
+    @Test
     fun arrow_decommission_should_remove_ship(){
         val fleet = Fleet("Delta",
             listOf(Squadron("Hope",
