@@ -88,7 +88,7 @@ class DecommissionTest {
             )
             )
         )
-        val actualFleet = arrowDecommissionShip(fleet, "Hope", "Pegasus")
+        val actualFleet = arrowDecommissionShip(fleet, "Hope", "XP130")
         assertEquals(expectedFleet, actualFleet)
     }
 }

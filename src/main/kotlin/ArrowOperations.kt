@@ -11,6 +11,12 @@ val starships: Lens<Squadron, List<Starship>> = Lens(
     set = { squadron, registry -> squadron.copy(registry = registry)}
 )
 
+val squadrons: Lens<Fleet, List<Squadron>> = Lens(
+    get = { it.registry },
+    set = { fleet, registry -> fleet.copy(registry = registry)}
+)
+
+val everySquadron = Traversal.list<Squadron>()
 val everyStarship = Traversal.list<Starship>()
 
 fun arrowRenameStarship(starship: Starship, shipName: String): Starship {
@@ -37,6 +43,14 @@ fun arrowRenameShipInSquadron(squadron: Squadron, serialNumber: String, shipName
     return squadronMap.modify(squadron, squadUpdate)
 }
 
-fun arrowDecommissionShip(fleet: Fleet, squadName: String, shipName: String): Fleet {
-    return fleet
+fun arrowDecommissionShip(fleet: Fleet, squadName: String, serialNumber: String): Fleet {
+    val fleetMap = squadrons compose everySquadron
+    fun squadRemove(squadron: Squadron): Squadron{
+        return if (squadron.squadName.equals(squadName)) {
+            arrowRemoveShipBySerialNumber(squadron, serialNumber)
+        } else {
+            squadron
+        }
+    }
+    return fleetMap.modify(fleet) { squadron: Squadron -> squadRemove(squadron) }
 }
