@@ -24,12 +24,12 @@ fun arrowRenameStarship(starship: Starship, shipName: String): Starship {
 }
 
 fun arrowRemoveShipBySerialNumber(squadron: Squadron, serialNumber: String): Squadron {
-    val hasSerialNumber = { ship: Starship -> ship.serialNumber.equals(serialNumber) }
+    val hasSerialNumber = { ship: Starship -> ship.serialNumber == serialNumber }
     return starships.modify(squadron) { it.filter { ship -> !hasSerialNumber(ship) } }
 }
 
 fun renameShipBySerialNumber(starship: Starship, serialNumber: String, shipName: String): Starship{
-    return if (starship.serialNumber.equals(serialNumber)){
+    return if (starship.serialNumber == serialNumber){
         starship.copy(shipName = shipName)
     } else {
         starship
@@ -45,7 +45,7 @@ fun arrowRenameShipInSquadron(squadron: Squadron, serialNumber: String, shipName
 fun arrowDecommissionShip(fleet: Fleet, squadName: String, serialNumber: String): Fleet {
     val fleetMap = squadrons compose everySquadron
     fun squadRemove(squadron: Squadron): Squadron{
-        return if (squadron.squadName.equals(squadName)) {
+        return if (squadron.squadName == squadName) {
             arrowRemoveShipBySerialNumber(squadron, serialNumber)
         } else {
             squadron
