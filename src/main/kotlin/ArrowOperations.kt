@@ -20,8 +20,7 @@ val everySquadron = Traversal.list<Squadron>()
 val everyStarship = Traversal.list<Starship>()
 
 fun arrowRenameStarship(starship: Starship, shipName: String): Starship {
-    val shipLambda = { _: String -> shipName}
-    return starshipName.modify(starship, shipLambda)
+    return starshipName.modify(starship) { shipName }
 }
 
 fun arrowRemoveShipBySerialNumber(squadron: Squadron, serialNumber: String): Squadron {
