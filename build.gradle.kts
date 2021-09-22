@@ -8,15 +8,15 @@ plugins {
 
 group = "me.skyle"
 version = "1.0-SNAPSHOT"
-val arrow_version = "0.13.2"
+val arrowVersion = "1.0.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("io.arrow-kt:arrow-optics:$arrow_version")
-    kapt("io.arrow-kt:arrow-meta:$arrow_version")
+    implementation("io.arrow-kt:arrow-optics:$arrowVersion")
+    kapt("io.arrow-kt:arrow-meta:$arrowVersion")
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
