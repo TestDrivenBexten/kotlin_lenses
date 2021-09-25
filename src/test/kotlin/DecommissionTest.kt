@@ -6,22 +6,28 @@ class DecommissionTest {
     private val minotaur = Starship("Minotaur", "YR023", 70, 100)
 
     @Test
-    fun decommission_should_remove_ship(){
-        val fleet = Fleet("Delta",
-            listOf(Squadron("Hope",
-                listOf(
-                    pegasus,
-                    minotaur
-                )
+    fun decommission_should_remove_ship() {
+        val fleet = Fleet(
+            "Delta",
+            listOf(
+                Squadron(
+                    "Hope",
+                    listOf(
+                        pegasus,
+                        minotaur
+                    )
                 )
             )
         )
-        val expectedFleet = Fleet("Delta",
-            listOf(Squadron("Hope",
-                listOf(
-                    minotaur
+        val expectedFleet = Fleet(
+            "Delta",
+            listOf(
+                Squadron(
+                    "Hope",
+                    listOf(
+                        minotaur
+                    )
                 )
-            )
             )
         )
         val actualFleet = decommissionShip(fleet, "Hope", "Pegasus")
@@ -29,21 +35,23 @@ class DecommissionTest {
     }
 
     @Test
-    fun arrow_starship_should_be_renamed(){
+    fun arrow_starship_should_be_renamed() {
         val expectedStarship = pegasus.copy(shipName = "Minotaur")
         val renamedStarship = arrowRenameStarship(pegasus, "Minotaur")
         assertEquals(expectedStarship, renamedStarship)
     }
 
     @Test
-    fun arrow_squadron_should_rename_ship_by_serial_number(){
-        val squadron = Squadron("Hope",
+    fun arrow_squadron_should_rename_ship_by_serial_number() {
+        val squadron = Squadron(
+            "Hope",
             listOf(
                 pegasus,
                 minotaur
             )
         )
-        val expectedSquadron = Squadron("Hope",
+        val expectedSquadron = Squadron(
+            "Hope",
             listOf(
                 pegasus,
                 minotaur.copy(shipName = "Icarus")
@@ -54,14 +62,16 @@ class DecommissionTest {
     }
 
     @Test
-    fun arrow_squadron_should_remove_ship_by_serial_number(){
-        val squadron = Squadron("Hope",
+    fun arrow_squadron_should_remove_ship_by_serial_number() {
+        val squadron = Squadron(
+            "Hope",
             listOf(
                 pegasus,
                 minotaur
             )
         )
-        val expectedSquadron = Squadron("Hope",
+        val expectedSquadron = Squadron(
+            "Hope",
             listOf(
                 pegasus
             )
@@ -71,22 +81,28 @@ class DecommissionTest {
     }
 
     @Test
-    fun arrow_decommission_should_remove_ship(){
-        val fleet = Fleet("Delta",
-            listOf(Squadron("Hope",
-                listOf(
-                    pegasus,
-                    minotaur
+    fun arrow_decommission_should_remove_ship() {
+        val fleet = Fleet(
+            "Delta",
+            listOf(
+                Squadron(
+                    "Hope",
+                    listOf(
+                        pegasus,
+                        minotaur
+                    )
                 )
-            )
             )
         )
-        val expectedFleet = Fleet("Delta",
-            listOf(Squadron("Hope",
-                listOf(
-                    minotaur
+        val expectedFleet = Fleet(
+            "Delta",
+            listOf(
+                Squadron(
+                    "Hope",
+                    listOf(
+                        minotaur
+                    )
                 )
-            )
             )
         )
         val actualFleet = arrowDecommissionShip(fleet, "Hope", "XP130")

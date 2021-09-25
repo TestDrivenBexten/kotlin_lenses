@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.4.32"
     kotlin("kapt") version "1.5.31"
+    id("org.jmailen.kotlinter") version "3.6.0"
     application
 }
 

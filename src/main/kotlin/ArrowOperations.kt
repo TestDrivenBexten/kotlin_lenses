@@ -3,17 +3,17 @@ import arrow.optics.Traversal
 
 val starshipName: Lens<Starship, String> = Lens(
     get = { it.shipName },
-    set = { starship, shipName -> starship.copy(shipName = shipName)}
+    set = { starship, shipName -> starship.copy(shipName = shipName) }
 )
 
 val starships: Lens<Squadron, List<Starship>> = Lens(
     get = { it.registry },
-    set = { squadron, registry -> squadron.copy(registry = registry)}
+    set = { squadron, registry -> squadron.copy(registry = registry) }
 )
 
 val squadrons: Lens<Fleet, List<Squadron>> = Lens(
     get = { it.registry },
-    set = { fleet, registry -> fleet.copy(registry = registry)}
+    set = { fleet, registry -> fleet.copy(registry = registry) }
 )
 
 val everySquadron = Traversal.list<Squadron>()
@@ -28,23 +28,23 @@ fun arrowRemoveShipBySerialNumber(squadron: Squadron, serialNumber: String): Squ
     return starships.modify(squadron) { it.filter { ship -> !hasSerialNumber(ship) } }
 }
 
-fun renameShipBySerialNumber(starship: Starship, serialNumber: String, shipName: String): Starship{
-    return if (starship.serialNumber == serialNumber){
+fun renameShipBySerialNumber(starship: Starship, serialNumber: String, shipName: String): Starship {
+    return if (starship.serialNumber == serialNumber) {
         starship.copy(shipName = shipName)
     } else {
         starship
     }
 }
 
-fun arrowRenameShipInSquadron(squadron: Squadron, serialNumber: String, shipName: String) : Squadron {
+fun arrowRenameShipInSquadron(squadron: Squadron, serialNumber: String, shipName: String): Squadron {
     val squadronMap = starships compose everyStarship
-    val squadUpdate = { starship: Starship -> renameShipBySerialNumber(starship, serialNumber, shipName)}
+    val squadUpdate = { starship: Starship -> renameShipBySerialNumber(starship, serialNumber, shipName) }
     return squadronMap.modify(squadron, squadUpdate)
 }
 
 fun arrowDecommissionShip(fleet: Fleet, squadName: String, serialNumber: String): Fleet {
     val fleetMap = squadrons compose everySquadron
-    fun squadRemove(squadron: Squadron): Squadron{
+    fun squadRemove(squadron: Squadron): Squadron {
         return if (squadron.squadName == squadName) {
             arrowRemoveShipBySerialNumber(squadron, serialNumber)
         } else {
