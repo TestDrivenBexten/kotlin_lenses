@@ -10,3 +10,7 @@ fun decommissionShip(fleet: Fleet, squadName: String, shipName: String): Fleet {
     }
     return Fleet(fleet.fleetName, newSquadList)
 }
+
+fun listShipsInFleet(fleet: Fleet): List<String> {
+    return fleet.registry.flatMap { it.registry.map { it.shipName } }
+}
