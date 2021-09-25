@@ -6,9 +6,9 @@ val starshipName: Lens<Starship, String> = Lens(
     set = { starship, shipName -> starship.copy(shipName = shipName) }
 )
 
-val starshipCurrentFuel: Lens<Starship, Int> = Lens(
+val starshipRefuel: Lens<Starship, Int> = Lens(
     get = {it.currentFuel},
-    set = { starship, fuel -> starship.copy(currentFuel = fuel)}
+    set = { ship, fuel -> ship.copy(currentFuel = ship.currentFuel + fuel)}
 )
 
 val starships: Lens<Squadron, List<Starship>> = Lens(
@@ -60,5 +60,6 @@ fun arrowDecommissionShip(fleet: Fleet, squadName: String, serialNumber: String)
 }
 
 fun arrowRefuelShipsInFleet(fleet: Fleet, refuelAmount: Int): Fleet {
-    return fleet
+    val fleetRefuel = squadrons compose everySquadron compose starships compose everyStarship compose starshipRefuel
+    return fleetRefuel.modify(fleet) { refuelAmount }
 }
