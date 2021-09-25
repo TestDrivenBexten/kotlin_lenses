@@ -58,3 +58,7 @@ fun arrowDecommissionShip(fleet: Fleet, squadName: String, serialNumber: String)
     }
     return fleetMap.modify(fleet) { squadron: Squadron -> squadRemove(squadron) }
 }
+
+fun arrowRefuelShipsInFleet(fleet: Fleet, refuelAmount: Int): Fleet {
+    return fleet
+}
