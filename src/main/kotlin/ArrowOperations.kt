@@ -24,6 +24,8 @@ val squadrons: Lens<Fleet, List<Squadron>> = Lens(
 val everySquadron = Traversal.list<Squadron>()
 val everyStarship = Traversal.list<Starship>()
 
+val fleetShips = squadrons compose everySquadron compose starships
+
 fun arrowRenameStarship(starship: Starship, shipName: String): Starship {
     return starshipName.modify(starship) { shipName }
 }
@@ -60,6 +62,6 @@ fun arrowDecommissionShip(fleet: Fleet, squadName: String, serialNumber: String)
 }
 
 fun arrowRefuelShipsInFleet(fleet: Fleet, refuelAmount: Int): Fleet {
-    val fleetRefuel = squadrons compose everySquadron compose starships compose everyStarship compose starshipRefuel
+    val fleetRefuel = fleetShips compose everyStarship compose starshipRefuel
     return fleetRefuel.modify(fleet) { refuelAmount }
 }
