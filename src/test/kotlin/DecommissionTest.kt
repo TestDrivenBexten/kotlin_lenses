@@ -5,18 +5,7 @@ class DecommissionTest {
 
     @Test
     fun decommission_should_remove_ship() {
-        val fleet = Fleet(
-            "Delta",
-            listOf(
-                Squadron(
-                    "Hope",
-                    listOf(
-                        pegasus,
-                        minotaur
-                    )
-                )
-            )
-        )
+        val fleet = deltaFleet
         val expectedFleet = Fleet(
             "Delta",
             listOf(
@@ -53,18 +42,7 @@ class DecommissionTest {
 
     @Test
     fun arrow_decommission_should_remove_ship() {
-        val fleet = Fleet(
-            "Delta",
-            listOf(
-                Squadron(
-                    "Hope",
-                    listOf(
-                        pegasus,
-                        minotaur
-                    )
-                )
-            )
-        )
+        val fleet = deltaFleet
         val expectedFleet = Fleet(
             "Delta",
             listOf(

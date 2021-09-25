@@ -6,6 +6,11 @@ val starshipName: Lens<Starship, String> = Lens(
     set = { starship, shipName -> starship.copy(shipName = shipName) }
 )
 
+val starshipCurrentFuel: Lens<Starship, Int> = Lens(
+    get = {it.currentFuel},
+    set = { starship, fuel -> starship.copy(currentFuel = fuel)}
+)
+
 val starships: Lens<Squadron, List<Starship>> = Lens(
     get = { it.registry },
     set = { squadron, registry -> squadron.copy(registry = registry) }
