@@ -65,3 +65,7 @@ fun arrowRefuelShipsInFleet(fleet: Fleet, refuelAmount: Int): Fleet {
     val fleetRefuel = fleetShips compose everyStarship compose starshipRefuel
     return fleetRefuel.modify(fleet) { refuelAmount }
 }
+
+fun arrowListShipsInFleet(fleet: Fleet): List<String> {
+    return listOf()
+}
