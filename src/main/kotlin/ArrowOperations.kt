@@ -1,6 +1,5 @@
 import arrow.optics.Every
 import arrow.optics.Lens
-import arrow.optics.Traversal
 
 val starshipName: Lens<Starship, String> = Lens(
     get = { it.shipName },
@@ -22,7 +21,7 @@ val squadrons: Lens<Fleet, List<Squadron>> = Lens(
     set = { fleet, registry -> fleet.copy(registry = registry) }
 )
 
-val everySquadron = Traversal.list<Squadron>()
+val everySquadron = Every.list<Squadron>()
 val everyStarship = Every.list<Starship>()
 
 val fleetShips = squadrons compose everySquadron compose starships
