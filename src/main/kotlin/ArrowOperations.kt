@@ -1,8 +1,6 @@
-import arrow.optics.Fold
+import arrow.optics.Every
 import arrow.optics.Lens
-import arrow.optics.PTraversal
 import arrow.optics.Traversal
-import arrow.typeclasses.Monoid
 
 val starshipName: Lens<Starship, String> = Lens(
     get = { it.shipName },
@@ -25,7 +23,7 @@ val squadrons: Lens<Fleet, List<Squadron>> = Lens(
 )
 
 val everySquadron = Traversal.list<Squadron>()
-val everyStarship = Traversal.list<Starship>()
+val everyStarship = Every.list<Starship>()
 
 val fleetShips = squadrons compose everySquadron compose starships
 
@@ -70,5 +68,6 @@ fun arrowRefuelShipsInFleet(fleet: Fleet, refuelAmount: Int): Fleet {
 }
 
 fun arrowListShipsInFleet(fleet: Fleet): List<String> {
-    return fleet.registry.flatMap { it.registry.map { it.shipName } }
+    val squadShipNames = starships compose everyStarship compose starshipName
+    return fleet.registry.flatMap { squadShipNames.getAll(it) }
 }
