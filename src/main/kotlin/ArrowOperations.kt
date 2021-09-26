@@ -67,6 +67,6 @@ fun arrowRefuelShipsInFleet(fleet: Fleet, refuelAmount: Int): Fleet {
 }
 
 fun arrowListShipsInFleet(fleet: Fleet): List<String> {
-    val squadShipNames = squadShips compose everyStarship compose starshipName
-    return fleet.registry.flatMap { squadShipNames.getAll(it) }
+    val fleetShipNames = fleetShips compose everyStarship compose starshipName
+    return fleetShipNames.getAll(fleet)
 }
