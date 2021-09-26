@@ -11,7 +11,7 @@ val starshipRefuel: Lens<Starship, Int> = Lens(
     set = { ship, fuel -> ship.copy(currentFuel = ship.currentFuel + fuel)}
 )
 
-val starships: Lens<Squadron, List<Starship>> = Lens(
+val squadShips: Lens<Squadron, List<Starship>> = Lens(
     get = { it.registry },
     set = { squadron, registry -> squadron.copy(registry = registry) }
 )
@@ -24,7 +24,7 @@ val fleetSquads: Lens<Fleet, List<Squadron>> = Lens(
 val everySquadron = Every.list<Squadron>()
 val everyStarship = Every.list<Starship>()
 
-val fleetShips = fleetSquads compose everySquadron compose starships
+val fleetShips = fleetSquads compose everySquadron compose squadShips
 
 fun arrowRenameStarship(starship: Starship, shipName: String): Starship {
     return starshipName.modify(starship) { shipName }
@@ -32,7 +32,7 @@ fun arrowRenameStarship(starship: Starship, shipName: String): Starship {
 
 fun arrowRemoveShipBySerialNumber(squadron: Squadron, serialNumber: String): Squadron {
     val hasSerialNumber = { ship: Starship -> ship.serialNumber == serialNumber }
-    return starships.modify(squadron) { it.filter { ship -> !hasSerialNumber(ship) } }
+    return squadShips.modify(squadron) { it.filter { ship -> !hasSerialNumber(ship) } }
 }
 
 fun renameShipBySerialNumber(starship: Starship, serialNumber: String, shipName: String): Starship {
@@ -44,7 +44,7 @@ fun renameShipBySerialNumber(starship: Starship, serialNumber: String, shipName:
 }
 
 fun arrowRenameShipInSquadron(squadron: Squadron, serialNumber: String, shipName: String): Squadron {
-    val squadronMap = starships compose everyStarship
+    val squadronMap = squadShips compose everyStarship
     val squadUpdate = { starship: Starship -> renameShipBySerialNumber(starship, serialNumber, shipName) }
     return squadronMap.modify(squadron, squadUpdate)
 }
@@ -67,6 +67,6 @@ fun arrowRefuelShipsInFleet(fleet: Fleet, refuelAmount: Int): Fleet {
 }
 
 fun arrowListShipsInFleet(fleet: Fleet): List<String> {
-    val squadShipNames = starships compose everyStarship compose starshipName
+    val squadShipNames = squadShips compose everyStarship compose starshipName
     return fleet.registry.flatMap { squadShipNames.getAll(it) }
 }
