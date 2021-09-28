@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class AdmiralTests {
 
@@ -15,5 +17,12 @@ class AdmiralTests {
             )
         )
         val steward = arrowGetFleetSteward(fleet)
+        assertNull(steward)
+    }
+
+    @Test
+    fun should_return_steward_from_fleet_with_admiral() {
+        val steward = arrowGetFleetSteward(deltaFleet)
+        assertEquals(steward, Steward("Tuvok"))
     }
 }
