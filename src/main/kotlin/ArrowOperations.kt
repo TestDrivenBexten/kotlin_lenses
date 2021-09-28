@@ -1,5 +1,7 @@
+import arrow.core.toOption
 import arrow.optics.Every
 import arrow.optics.Lens
+import arrow.optics.Optional
 
 val starshipName: Lens<Starship, String> = Lens(
     get = { it.shipName },
@@ -19,6 +21,21 @@ val squadShips: Lens<Squadron, List<Starship>> = Lens(
 val fleetSquads: Lens<Fleet, List<Squadron>> = Lens(
     get = { it.registry },
     set = { fleet, registry -> fleet.copy(registry = registry) }
+)
+
+val stewardName: Lens<Steward, String> = Lens(
+    get = {it.stewardName},
+    set = { steward, name -> steward.copy(stewardName = name)}
+)
+
+val optionalAdmiral: Optional<Fleet, Admiral> = Optional(
+    getOption = { fleet -> fleet.admiral.toOption() },
+    set = { fleet, admiral -> fleet.copy(admiral = admiral) }
+)
+
+val optionalSteward: Optional<Admiral, Steward> = Optional(
+    getOption = { admiral -> admiral.steward.toOption() },
+    set = { admiral, steward -> admiral.copy(steward = steward)}
 )
 
 val everySquadron = Every.list<Squadron>()
@@ -75,6 +92,7 @@ fun arrowGetFleetSteward(fleet: Fleet): Steward? {
     return fleet.admiral?.steward
 }
 
-fun arrowRenameFleetSteward(fleet: Fleet, stewardName: String): Fleet {
-    return fleet
+fun arrowRenameFleetSteward(fleet: Fleet, newName: String): Fleet {
+    val fleetStewardName = optionalAdmiral compose optionalSteward compose stewardName
+    return fleetStewardName.modify(fleet) { newName }
 }
