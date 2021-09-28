@@ -8,6 +8,7 @@ class DecommissionTest {
         val fleet = deltaFleet
         val expectedFleet = Fleet(
             "Delta",
+            Admiral("Janeway"),
             listOf(
                 Squadron(
                     "Hope",
@@ -45,6 +46,7 @@ class DecommissionTest {
         val fleet = deltaFleet
         val expectedFleet = Fleet(
             "Delta",
+            Admiral("Janeway"),
             listOf(
                 Squadron(
                     "Hope",
