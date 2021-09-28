@@ -74,3 +74,7 @@ fun arrowListShipsInFleet(fleet: Fleet): List<String> {
 fun arrowGetFleetSteward(fleet: Fleet): Steward? {
     return fleet.admiral?.steward
 }
+
+fun arrowRenameFleetSteward(fleet: Fleet, stewardName: String): Fleet {
+    return fleet
+}

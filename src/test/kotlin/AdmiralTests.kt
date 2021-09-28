@@ -25,4 +25,23 @@ class AdmiralTests {
         val steward = arrowGetFleetSteward(deltaFleet)
         assertEquals(steward, Steward("Tuvok"))
     }
+
+    @Test
+    fun should_rename_fleet_steward() {
+        val expectedFleet = Fleet(
+            "Delta",
+            Admiral("Janeway", Steward("Neelix")),
+            listOf(
+                Squadron(
+                    "Hope",
+                    listOf(
+                        pegasus,
+                        minotaur
+                    )
+                )
+            )
+        )
+        val actualFleet = arrowRenameFleetSteward(deltaFleet, "Neelix")
+        assertEquals(expectedFleet, actualFleet)
+    }
 }
