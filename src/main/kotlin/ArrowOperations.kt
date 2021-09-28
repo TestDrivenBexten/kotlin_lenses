@@ -72,5 +72,5 @@ fun arrowListShipsInFleet(fleet: Fleet): List<String> {
 }
 
 fun arrowGetFleetSteward(fleet: Fleet): Steward? {
-    return null
+    return fleet.admiral?.steward
 }
