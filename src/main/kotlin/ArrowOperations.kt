@@ -7,8 +7,8 @@ val starshipName: Lens<Starship, String> = Lens(
 )
 
 val starshipRefuel: Lens<Starship, Int> = Lens(
-    get = {it.currentFuel},
-    set = { ship, fuel -> ship.copy(currentFuel = ship.currentFuel + fuel)}
+    get = { it.currentFuel },
+    set = { ship, fuel -> ship.copy(currentFuel = ship.currentFuel + fuel) }
 )
 
 val squadShips: Lens<Squadron, List<Starship>> = Lens(
@@ -69,4 +69,8 @@ fun arrowRefuelShipsInFleet(fleet: Fleet, refuelAmount: Int): Fleet {
 fun arrowListShipsInFleet(fleet: Fleet): List<String> {
     val fleetShipNames = fleetShips compose everyStarship compose starshipName
     return fleetShipNames.getAll(fleet)
+}
+
+fun arrowGetFleetSteward(fleet: Fleet): Steward? {
+    return null
 }

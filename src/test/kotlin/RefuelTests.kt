@@ -8,7 +8,7 @@ class RefuelTests {
         val fleet = deltaFleet
         val expectedFleet = Fleet(
             "Delta",
-            Admiral("Janeway"),
+            Admiral("Janeway", Steward("Tuvok")),
             listOf(
                 Squadron(
                     "Hope",

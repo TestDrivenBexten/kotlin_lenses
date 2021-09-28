@@ -8,7 +8,10 @@ fun decommissionShip(fleet: Fleet, squadName: String, shipName: String): Fleet {
             squadron
         }
     }
-    return Fleet(fleet.fleetName, Admiral("Janeway"), newSquadList)
+    return Fleet(
+        fleet.fleetName,
+        Admiral("Janeway", Steward("Tuvok")), newSquadList
+    )
 }
 
 fun listShipsInFleet(fleet: Fleet): List<String> {
