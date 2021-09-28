@@ -17,3 +17,11 @@ fun decommissionShip(fleet: Fleet, squadName: String, shipName: String): Fleet {
 fun listShipsInFleet(fleet: Fleet): List<String> {
     return fleet.registry.flatMap { it.registry.map { it.shipName } }
 }
+
+fun renameFleetSteward(fleet: Fleet, newName: String): Fleet {
+    return fleet.copy(admiral = fleet.admiral?.copy(
+        steward = fleet.admiral.steward?.copy(
+            stewardName = newName
+        )
+    ))
+}

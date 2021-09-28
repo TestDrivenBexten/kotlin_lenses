@@ -44,4 +44,23 @@ class AdmiralTests {
         val actualFleet = arrowRenameFleetSteward(deltaFleet, "Neelix")
         assertEquals(expectedFleet, actualFleet)
     }
+
+    @Test
+    fun should_rename_fleet_steward_without_arrow() {
+        val expectedFleet = Fleet(
+            "Delta",
+            Admiral("Janeway", Steward("Neelix")),
+            listOf(
+                Squadron(
+                    "Hope",
+                    listOf(
+                        pegasus,
+                        minotaur
+                    )
+                )
+            )
+        )
+        val actualFleet = renameFleetSteward(deltaFleet, "Neelix")
+        assertEquals(expectedFleet, actualFleet)
+    }
 }
