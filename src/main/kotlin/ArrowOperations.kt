@@ -96,3 +96,7 @@ fun arrowRenameFleetSteward(fleet: Fleet, newName: String): Fleet {
     val fleetStewardName = optionalAdmiral compose optionalSteward compose stewardName
     return fleetStewardName.modify(fleet) { newName }
 }
+
+fun arrowWarpToDestination(fleet: Fleet, destination: Coordinates): Fleet {
+    return fleet
+}
