@@ -1,3 +1,5 @@
+import arrow.core.Option
+import arrow.core.Some
 import arrow.core.toOption
 import arrow.optics.Every
 import arrow.optics.Lens
@@ -103,12 +105,12 @@ fun arrowRenameFleetSteward(fleet: Fleet, newName: String): Fleet {
     return fleetStewardName.modify(fleet) { newName }
 }
 
-fun arrowWarpToDestination(fleet: Fleet, destination: Coordinates): Fleet {
+fun arrowWarpToDestination(fleet: Fleet, destination: Coordinates): Option<Fleet> {
     val originalCoordinates = fleet.coordinates
     val (x1, y1) = originalCoordinates
     val (x2, y2) = destination
     val travelDistance = abs(x1 - x2) + abs(y1 - y2)
     val fleetConsumeFuel = fleetShips compose everyStarship compose starshipConsumeFuel
     val movedFleet = fleet.copy(coordinates = destination)
-    return fleetConsumeFuel.modify(movedFleet) { travelDistance }
+    return Some(fleetConsumeFuel.modify(movedFleet) { travelDistance })
 }
