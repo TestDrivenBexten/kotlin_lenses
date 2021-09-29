@@ -2,6 +2,7 @@ import arrow.core.toOption
 import arrow.optics.Every
 import arrow.optics.Lens
 import arrow.optics.Optional
+import kotlin.math.abs
 
 val starshipName: Lens<Starship, String> = Lens(
     get = { it.shipName },
@@ -11,6 +12,11 @@ val starshipName: Lens<Starship, String> = Lens(
 val starshipRefuel: Lens<Starship, Int> = Lens(
     get = { it.currentFuel },
     set = { ship, fuel -> ship.copy(currentFuel = ship.currentFuel + fuel) }
+)
+
+val starshipConsumeFuel: Lens<Starship, Int> = Lens(
+    get = { it.currentFuel },
+    set = { ship, fuel -> ship.copy(currentFuel = ship.currentFuel - fuel) }
 )
 
 val squadShips: Lens<Squadron, List<Starship>> = Lens(
@@ -98,5 +104,11 @@ fun arrowRenameFleetSteward(fleet: Fleet, newName: String): Fleet {
 }
 
 fun arrowWarpToDestination(fleet: Fleet, destination: Coordinates): Fleet {
-    return fleet
+    val originalCoordinates = fleet.coordinates
+    val (x1, y1) = originalCoordinates
+    val (x2, y2) = destination
+    val travelDistance = abs(x1 - x2) + abs(y1 - y2)
+    val fleetConsumeFuel = fleetShips compose everyStarship compose starshipConsumeFuel
+    val movedFleet = fleet.copy(coordinates = destination)
+    return fleetConsumeFuel.modify(movedFleet) { travelDistance }
 }
