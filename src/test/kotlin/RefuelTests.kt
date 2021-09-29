@@ -8,6 +8,7 @@ class RefuelTests {
         val fleet = deltaFleet
         val expectedFleet = Fleet(
             "Delta",
+            Coordinates(100, 100),
             Admiral("Janeway", Steward("Tuvok")),
             listOf(
                 Squadron(

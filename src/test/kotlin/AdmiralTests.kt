@@ -8,6 +8,7 @@ class AdmiralTests {
     fun should_return_null_steward_from_fleet_without_admiral() {
         val fleet = Fleet(
             "Delta",
+            Coordinates(100, 100),
             null,
             listOf(
                 Squadron(
@@ -30,6 +31,7 @@ class AdmiralTests {
     fun should_rename_fleet_steward() {
         val expectedFleet = Fleet(
             "Delta",
+            Coordinates(100, 100),
             Admiral("Janeway", Steward("Neelix")),
             listOf(
                 Squadron(
@@ -49,6 +51,7 @@ class AdmiralTests {
     fun should_rename_fleet_steward_without_arrow() {
         val expectedFleet = Fleet(
             "Delta",
+            Coordinates(100,100),
             Admiral("Janeway", Steward("Neelix")),
             listOf(
                 Squadron(

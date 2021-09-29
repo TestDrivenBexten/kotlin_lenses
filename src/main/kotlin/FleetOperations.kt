@@ -10,7 +10,9 @@ fun decommissionShip(fleet: Fleet, squadName: String, shipName: String): Fleet {
     }
     return Fleet(
         fleet.fleetName,
-        Admiral("Janeway", Steward("Tuvok")), newSquadList
+        Coordinates(100,100),
+        Admiral("Janeway", Steward("Tuvok")),
+        newSquadList
     )
 }
 
@@ -19,9 +21,11 @@ fun listShipsInFleet(fleet: Fleet): List<String> {
 }
 
 fun renameFleetSteward(fleet: Fleet, newName: String): Fleet {
-    return fleet.copy(admiral = fleet.admiral?.copy(
-        steward = fleet.admiral.steward?.copy(
-            stewardName = newName
+    return fleet.copy(
+        admiral = fleet.admiral?.copy(
+            steward = fleet.admiral.steward?.copy(
+                stewardName = newName
+            )
         )
-    ))
+    )
 }

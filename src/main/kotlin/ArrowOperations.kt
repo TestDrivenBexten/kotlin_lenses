@@ -24,8 +24,8 @@ val fleetSquads: Lens<Fleet, List<Squadron>> = Lens(
 )
 
 val stewardName: Lens<Steward, String> = Lens(
-    get = {it.stewardName},
-    set = { steward, name -> steward.copy(stewardName = name)}
+    get = { it.stewardName },
+    set = { steward, name -> steward.copy(stewardName = name) }
 )
 
 val optionalAdmiral: Optional<Fleet, Admiral> = Optional(
@@ -35,7 +35,7 @@ val optionalAdmiral: Optional<Fleet, Admiral> = Optional(
 
 val optionalSteward: Optional<Admiral, Steward> = Optional(
     getOption = { admiral -> admiral.steward.toOption() },
-    set = { admiral, steward -> admiral.copy(steward = steward)}
+    set = { admiral, steward -> admiral.copy(steward = steward) }
 )
 
 val everySquadron = Every.list<Squadron>()
