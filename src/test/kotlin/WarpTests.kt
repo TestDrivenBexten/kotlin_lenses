@@ -1,6 +1,5 @@
 import arrow.core.Some
 import org.junit.jupiter.api.Test
-import kotlin.math.exp
 import kotlin.test.assertEquals
 
 class WarpTests {
